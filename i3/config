@@ -108,6 +108,8 @@ bindsym $mod+a focus parent
 for_window [urgent=latest] focus
 
 hide_edge_borders both
+new_window pixel 0
+#for_window [class="^.*"] border pixel 1
 
 set $workspace1 "1:"
 set $workspace2 "2:"
@@ -268,3 +270,4 @@ bar {
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
+bindsym Print exec shutter -f -e -o '/media/razvan/Stuffs/Books/Docs/.asd/Shutter/%y-%m-%d-%T.png'
