@@ -31,7 +31,8 @@ font pango:System San Francisco Display 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+x exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -58,7 +59,7 @@ bindsym $mod+Right focus right
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
@@ -111,7 +112,7 @@ hide_edge_borders both
 new_window pixel 0
 #for_window [class="^.*"] border pixel 1
 
-set $workspace1 "1:"
+set $workspace1 "1:" 
 set $workspace2 "2:"
 set $workspace3 "3:"
 set $workspace4 "4:"
@@ -119,9 +120,19 @@ set $workspace5 "5:"
 set $workspace6 "6:"
 set $workspace7 "7:"
 set $workspace8 "8:"
-set $workspace9 "9:"
+set $workspace9 "9:"
 set $workspace10 "10:"
 
+workspace1 output LVDS1
+workspace2 output LVDS1
+workspace3 output LVDS1
+workspace4 output LVDS1
+workspace5 output LVDS1
+workspace6 output VGA1
+workspace7 output VGA1
+workspace8 output VGA1
+workspace9 output LVDS1
+workspace10 output LVDS1
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -147,21 +158,32 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
+#move container to output VGA1
+bindsym $mod+Shift+v move container to output VGA1
+#move container to output LVDS1
+bindsym $mod+Shift+l move container to output LVDS1
+
 # assign apps to workspaces
-assign [class="chromium-browser"] $workspace1
+assign [class="Chromium-browser"] $workspace1
 assign [class="Skype"] $workspace9
 assign [class="banshee"] $workspace10
 
-
+#make Skype window float so it looks nice
+for_window [title="Skype"] floating enable
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Ctrl+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
 # shuts down the computer
 bindsym $mod+Shift+s exec systemctl poweroff
+#restarts the computer
+bindsym $mod+Shift+r exec systemctl reboot
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -196,7 +218,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #i
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
-# Sreen brightness controls
+# Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
@@ -211,15 +233,22 @@ bindsym XF86AudioStop exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym $mod+F1 exec synapse
-bindsym $mod+F2 exec chromium-browser
-bindsym $mod+F3 exec thunar
-bindsym $mod+F4 exec banshee
-bindsym $mod+F5 exec subl
+#shortcuts for most used apps
+bindsym F1 exec chromium-browser
+bindsym F2 exec thunar
+bindsym F3 exec deluge
+bindsym F4 exec banshee
+bindsym F5 exec subl
+bindsym F6 exec synapse
+bindsym F7 exec skype
+bindsym F8 exec xviewer
+bindsym F9 exec pavucontrol
 
 
-# set background photo  
-exec_always feh --bg-scale /home/razvan/Pictures/circles.jpg
+# scratchpad
+bindsym $mod+Shift+m move scratchpad
+bindsym $mod+o scratchpad show
+
 
 # change system volume 
 bindsym $mod+Ctrl+m exec i3-sensible-terminal -e 'alsamixer'
@@ -270,4 +299,16 @@ bar {
 
 # hide/unhide i3status bar
 bindsym $mod+m bar mode toggle
+
+#take a screenshot
 bindsym Print exec shutter -f -e -o '/media/razvan/Stuffs/Books/Docs/.asd/Shutter/%y-%m-%d-%T.png'
+
+#Network Manager
+#exec --no-startup-id nm-applet
+
+#Multi monitor
+#exec xrandr --output LVDS1 --auto --right-of VGA1
+#exec xrandr --output VGA1 --auto --left-of LVDS1
+
+# set background photo  
+exec_always feh --bg-scale /home/razvan/Pictures/raindrops-on-the-window-photography-hd-wallpaper-1920x1080-1786-1366x768.jpg
