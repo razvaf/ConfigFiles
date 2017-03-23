@@ -166,7 +166,7 @@ bindsym $mod+Shift+l move container to output LVDS1
 # assign apps to workspaces
 assign [class="Chromium-browser"] $workspace1
 assign [class="Skype"] $workspace9
-assign [class="banshee"] $workspace10
+assign [class="Guayadeque"] $workspace10
 
 #make Skype window float so it looks nice
 for_window [title="Skype"] floating enable
@@ -237,7 +237,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym F1 exec chromium-browser
 bindsym F2 exec thunar
 bindsym F3 exec deluge
-bindsym F4 exec banshee
+bindsym F4 exec guayadeque
 bindsym F5 exec subl
 bindsym F6 exec synapse
 bindsym F7 exec skype
